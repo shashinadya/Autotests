@@ -20,15 +20,15 @@ public class PasswordsGenerator {
 
         driver.findElement(By.xpath("//div[@class='button GenerateBtn']")).click();
 
-        String generatedFirstPassword = driver.findElement(By.name("final_pass")).getText();
+        String generatedFirstPassword = driver.findElement(By.id("final_pass")).getAttribute("value");
 
         assertNotNull(generatedFirstPassword);
 
         driver.findElement(By.xpath("//div[@class='button GenerateBtn']")).click();
 
-        String generatedSecondPassword = driver.findElement(By.name("final_pass")).getText();
+        String generatedSecondPassword = driver.findElement(By.id("final_pass")).getAttribute("value");
 
-        assertEquals(generatedFirstPassword, generatedSecondPassword);
+        assertNotEquals(generatedFirstPassword, generatedSecondPassword);
 
         driver.findElement(By.id("Symbols")).click();
 
@@ -38,9 +38,9 @@ public class PasswordsGenerator {
 
         driver.findElement(By.xpath("//div[@class='button GenerateBtn']")).click();
 
-        String generatedThirdPassword = driver.findElement(By.name("final_pass")).getText();
+        String generatedThirdPassword = driver.findElement(By.id("final_pass")).getAttribute("value");
 
-        System.out.println("generatedThirdPassword: " + generatedThirdPassword);
+        //System.out.println("generatedThirdPassword: " + generatedThirdPassword);
 
         assertEquals(8, generatedThirdPassword.length());
 
