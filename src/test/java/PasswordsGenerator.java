@@ -7,21 +7,21 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class PasswordsGenerator {
-    @Test
 
+    @Test
     void passwordIsNotNull() {
 
-        System.setProperty("webdriver.chrome.driver", "libs/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "D:\\projects\\Autotests\\libs\\chromedriver.exe");
 
         WebDriver driver = new ChromeDriver();
 
         driver.get("https://passwordsgenerator.net/ru/");
 
-        driver.findElement(By.className("button GenerateBtn")).click();
+        driver.findElement(By.xpath("//div[@class='button GenerateBtn']")).click();
 
         String generatePassword = driver.findElement(By.id("final_pass")).getText();
 
-        assertTrue(generatePassword != null);
+        assertNotNull(generatePassword);
 
     }
 }
