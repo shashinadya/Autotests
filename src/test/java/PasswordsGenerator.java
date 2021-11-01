@@ -22,7 +22,7 @@ public class PasswordsGenerator {
 
         String generatedFirstPassword = driver.findElement(By.id("final_pass")).getAttribute("value");
 
-        assertFalse(generatedFirstPassword == "");
+        assertNotEquals("", generatedFirstPassword);
 
         driver.findElement(By.xpath("//div[@class='button GenerateBtn']")).click();
 
