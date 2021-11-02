@@ -3,6 +3,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.ClickAction;
 import org.openqa.selenium.support.ui.Select;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,15 +19,19 @@ public class PasswordsGenerator {
 
         driver.get("https://passwordsgenerator.net/ru/");
 
-        driver.findElement(By.xpath("//div[@class='button GenerateBtn']")).click();
+        WebElement generateBtn = driver.findElement(By.xpath("//div[@class='button GenerateBtn']"));
 
-        String generatedFirstPassword = driver.findElement(By.id("final_pass")).getAttribute("value");
+        generateBtn.click();
+
+        WebElement finalPass = driver.findElement(By.id("final_pass"));
+
+        String generatedFirstPassword = finalPass.getAttribute("value");
 
         assertNotEquals("", generatedFirstPassword);
 
-        driver.findElement(By.xpath("//div[@class='button GenerateBtn']")).click();
+        generateBtn.click();
 
-        String generatedSecondPassword = driver.findElement(By.id("final_pass")).getAttribute("value");
+        String generatedSecondPassword = finalPass.getAttribute("value");
 
         assertNotEquals(generatedFirstPassword, generatedSecondPassword);
 
@@ -36,9 +41,9 @@ public class PasswordsGenerator {
         Select select = new Select(selectLength);
         select.selectByVisibleText("8");
 
-        driver.findElement(By.xpath("//div[@class='button GenerateBtn']")).click();
+        generateBtn.click();
 
-        String generatedThirdPassword = driver.findElement(By.id("final_pass")).getAttribute("value");
+        String generatedThirdPassword = finalPass.getAttribute("value");
 
         //System.out.println("generatedThirdPassword: " + generatedThirdPassword);
 
