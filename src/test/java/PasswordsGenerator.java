@@ -49,5 +49,6 @@ public class PasswordsGenerator {
 
         assertEquals(8, generatedThirdPassword.length());
 
+        driver.quit();
     }
 }
