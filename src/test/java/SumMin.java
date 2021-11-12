@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class SumMin {
@@ -11,8 +12,10 @@ public class SumMin {
 
         int min = Math.min(number1, number2);
         System.out.println("Минимальное из введённых чисел равно " + min);
-
-        int sum = number1 + number2;
-        System.out.println("Сумма введённых чисел равна " + sum);
+        int sum = 0;
+        for (int i = 1; i <= min; i++) {
+            sum += i;
+        }
+            System.out.println("Сумма всех чисел до минимального числа включительно равна " + sum);
     }
 }
