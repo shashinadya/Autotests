@@ -45,7 +45,7 @@ public class Elements {
         //Шаг 4. Перевести ползунок внизу сайта слева направо
         Actions actions = new Actions(driver);
         WebElement draggerCursor = driver.findElement(By.className("dragger-cursor"));
-        moveCursor(draggerCursor, actions);
+        moveCursorToRightPosition(draggerCursor, actions);
 
         //Шаг 5. Взять координаты центра лампочки, зажать левую кнопку мыши и отвести сначала курсор немного влево, потом вправо
 
@@ -55,35 +55,35 @@ public class Elements {
         sleep(3000);
 
         //Шаг 6. Перевести ползунок внизу сайта слева направо
-        moveCursor(draggerCursor, actions);
+        moveCursorToRightPosition(draggerCursor, actions);
 
         //Шаг 7. Сделать клик левой кнопкой мыши на фотоаппарат
         actions.click(gl_canvas);
         sleep(3000);
 
         //Шаг 8. Перевести ползунок внизу сайта слева направо
-        moveCursor(draggerCursor, actions);
+        moveCursorToRightPosition(draggerCursor, actions);
 
         //Шаг 9. Зажать левую кнопку мыши на 7 сек
         actions.click().pause(7000).perform();
         sleep(3000);
 
         //Шаг 10. Перевести ползунок внизу сайта слева направо
-        moveCursor(draggerCursor, actions);
+        moveCursorToRightPosition(draggerCursor, actions);
 
         //Шаг 11. Зажать левую кнопку мыши и перенести курсор в любое место
         actions.clickAndHold().moveToElement(gl_canvas).perform();
         sleep(3000);
 
         //Шаг 12. Перевести ползунок внизу сайта слева направо
-        moveCursor(draggerCursor, actions);
+        moveCursorToRightPosition(draggerCursor, actions);
 
         //Шаг 13. Зажать левую кнопку мыши на 2 сек
         actions.clickAndHold().pause(2000).perform();
         sleep(3000);
 
         //Шаг 14. Перевести ползунок внизу сайта слева направо
-        moveCursor(draggerCursor, actions);
+        moveCursorToRightPosition(draggerCursor, actions);
 
         //Шаг 15. Закрыть сайт
         driver.quit();
@@ -95,7 +95,7 @@ public class Elements {
             e.printStackTrace();
         }
     }
-    public void moveCursor(WebElement draggerCursor, Actions actions) {
+    public void moveCursorToRightPosition(WebElement draggerCursor, Actions actions) {
         actions.dragAndDropBy(draggerCursor, 250, 0).perform();
     }
 }
