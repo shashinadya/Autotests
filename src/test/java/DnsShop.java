@@ -23,12 +23,11 @@ public class DnsShop {
         //Шаг 1. Навести на "Компьютеры"
         Actions actions = new Actions(driver);
         WebElement computers = driver.findElement(By.xpath("//a[text()='Компьютеры']"));
-        wait.until(ExpectedConditions.visibilityOf(computers));
-        actions.moveToElement(computers).perform();
+        actions.moveToElement(wait.until(ExpectedConditions.visibilityOf(computers))).perform();
 
         //Шаг 2. Выбрать "Материнские платы" в разделе "Комплектующие для ПК"
         WebElement motherBoards = driver.findElement(By.xpath("//a[text()='Материнские платы']"));
-        actions.click(motherBoards).perform();
+        motherBoards.click();
 
         //Шаг 3. Посчитать количество записей на странице
         String card = "//div[@class='catalog-product ui-button-widget']";
@@ -66,8 +65,9 @@ public class DnsShop {
         driver.findElement(By.cssSelector(".cart-link__lbl")).click();
 
         //Шаг 9. Сравнить число записей со случайным числом
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".cart-items__product")));
-        int size3 = driver.findElements(By.xpath("//div[@class='cart-items__product']")).size();
+        String cartItemProduct = "//div[@class='cart-items__product']";
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(cartItemProduct)));
+        int size3 = driver.findElements(By.xpath(cartItemProduct)).size();
         System.out.println(size3);
         assertEquals(size3, randomNumber);
         driver.quit();
