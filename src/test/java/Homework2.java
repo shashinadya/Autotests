@@ -31,7 +31,7 @@ public class Homework2 {
         int sum = 0;
         for (int i = 0; i < array1.length; i++) {
             if (i % 2 == 0)
-                sum = sum + array1[i];
+                sum += array1[i];
         }
         System.out.println(sum);
 
@@ -61,14 +61,8 @@ public class Homework2 {
         //Задание 6. Дано предложение. Посчитать количество слов в данном предложении
         System.out.println("\nЗадание 6. Дано предложение. Посчитать количество слов в данном предложении");
         String proposal = "Посчитать количество слов в данном предложении";
-        int count = 0;
-        count++;
-        for (int i = 0; i < proposal.length(); i++) {
-            if (proposal.charAt(i) == ' ') {
-                count++;
-            }
-        }
         System.out.println(proposal);
-        System.out.println("Количество слов в строке равно " + count);
+        String[] words = proposal.split(" ");
+        System.out.println("Количество слов в предложении равно " + words.length);
     }
 }
