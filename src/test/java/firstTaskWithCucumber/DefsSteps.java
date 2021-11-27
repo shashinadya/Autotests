@@ -1,94 +1,58 @@
 package firstTaskWithCucumber;
 
 import cucumber.api.java.ru.И;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class DefsSteps {
-    private WebDriver driver;
-    private String generatedFirstPassword;
-    private WebElement generateBtn;
-    private String generatedSecondPassword;
-    private WebElement finalPass;
-    private String generatedThirdPassword;
+
+    MainPage mainPage = new MainPage();
 
     @И("^настройка драйвера для браузера Chrome и инициализация драйвера$")
     public void propertiesOfDriver() {
-        System.setProperty("webdriver.chrome.driver", "D:\\projects\\Autotests\\libs\\chromedriver.exe");
-        driver = new ChromeDriver();
+        mainPage.propertiesOfDriver();
     }
 
     @И("^открыть сайт генератора паролей$")
     public void openPasswordsGeneratorSite() {
-        driver.get("https://passwordsgenerator.net/ru/");
+        mainPage.openPasswordsGeneratorSite();
     }
 
-    @И("^нажать на кнопку \"Генерировать пароль\" для получения первого пароля$")
-    public void pushTheButtonForGenerateFirstPassword() {
-        generateBtn = driver.findElement(By.xpath("//div[@class='button GenerateBtn']"));
-        generateBtn.click();
+    @И("^нажать на кнопку \"Генерировать пароль\" для генерации пароля$")
+    public void pushTheButtonForGeneratePassword() {
+        mainPage.pushTheButtonForGeneratePassword();
     }
 
-    @И("^получить значение первого сгенерированного пароля$")
-    public void getFirstPassword() {
-        finalPass = driver.findElement(By.id("final_pass"));
-        generatedFirstPassword = finalPass.getAttribute("value");
+    @И("^получить значение сгенерированного пароля$")
+    public void getPassword() {
+        mainPage.getPassword();
     }
 
-    @И("^проверить первый пароль на неравенство \"\"$")
+    @И("^проверить пароль на неравенство \"\"$")
     public void firstPasswordIsNotNullCheck() {
-        assertNotEquals("", generatedFirstPassword);
+        mainPage.passwordIsNotNullCheck();
     }
 
-    @И("^нажать на кнопку \"Генерировать пароль\" для получения второго пароля$")
-    public void pushTheButtonForGenerateSecondPassword() {
-        generateBtn.click();
-    }
-
-    @И("^получить значение второго сгенерированного пароля$")
-    public void getSecondPassword() {
-        generatedSecondPassword = finalPass.getAttribute("value");
-    }
-
-    @И("^проверить, что второй пароль не равен первому паролю$")
+    @И("^проверить, что пароль не равен предыдущему паролю$")
     public void secondPasswordIsNotEqualToTheFirstPassword() {
-        assertNotEquals(generatedFirstPassword, generatedSecondPassword);
+        mainPage.secondPasswordIsNotEqualToTheFirstPassword();
     }
 
     @И("^убрать галочку в чек-боксе \"Включить символы\"$")
     public void removeTheCheckboxWithSymbols() {
-        driver.findElement(By.id("Symbols")).click();
+        mainPage.removeTheCheckboxWithSymbols();
     }
 
-    @И("^выбрать в поле \"Длина пароля\" значение 8$")
+    @И("^выбрать в поле \"Длина пароля\" другое значение$")
     public void chooseOtherPasswordLength() {
-        WebElement selectLength = driver.findElement(By.id("pgLength"));
-        Select select = new Select(selectLength);
-        select.selectByVisibleText("8");
+        mainPage.chooseOtherPasswordLength();
     }
 
-    @И("^нажать на кнопку \"Генерировать пароль\" для получения третьего пароля$")
-    public void pushTheButtonForGenerateThirdPassword() {
-        generateBtn.click();
-    }
-
-    @И("^получить значение третьего сгенерированного пароля$")
-    public void getThirdPassword() {
-        generatedThirdPassword = finalPass.getAttribute("value");
-    }
-
-    @И("^проверить, что количество символов в третьем пароле равно 8$")
+    @И("^проверить, что количество символов в пароле равно выбранному значению$")
     public void numberOfSymbolsInTheThirdPasswordCheck() {
-        assertEquals(8, generatedThirdPassword.length());
+        mainPage.numberOfSymbolsInTheThirdPasswordCheck();
     }
 
     @И("^закрытие окна браузера и прекращение работы драйвера$")
     public void closeBrowserWindowAndFinishWorkWithDriver() {
-        driver.quit();
+        mainPage.closeBrowserWindowAndFinishWorkWithDriver();
     }
 }
