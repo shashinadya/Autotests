@@ -1,6 +1,10 @@
 package firstTaskWithCucumber;
 
 import cucumber.api.java.ru.И;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class DefsSteps {
 
@@ -8,7 +12,8 @@ public class DefsSteps {
 
     @И("^настройка драйвера для браузера Chrome и инициализация драйвера$")
     public void propertiesOfDriver() {
-        mainPage.propertiesOfDriver();
+        System.setProperty("webdriver.chrome.driver", "D:\\projects\\Autotests\\libs\\chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
     }
 
     @И("^открыть сайт генератора паролей$")
@@ -16,7 +21,7 @@ public class DefsSteps {
         mainPage.openPasswordsGeneratorSite();
     }
 
-    @И("^нажать на кнопку \"Генерировать пароль\" для генерации пароля$")
+    @И("^нажать на кнопку 'Генерировать пароль' для генерации пароля$")
     public void pushTheButtonForGeneratePassword() {
         mainPage.pushTheButtonForGeneratePassword();
     }
@@ -28,27 +33,27 @@ public class DefsSteps {
 
     @И("^проверить пароль на неравенство \"\"$")
     public void firstPasswordIsNotNullCheck() {
-        mainPage.passwordIsNotNullCheck();
+        assertNotEquals("", mainPage.returnFirstPassword());
     }
 
     @И("^проверить, что пароль не равен предыдущему паролю$")
     public void secondPasswordIsNotEqualToTheFirstPassword() {
-        mainPage.secondPasswordIsNotEqualToTheFirstPassword();
+        assertNotEquals(mainPage.returnFirstPassword(), mainPage.returnSecondPassword());
     }
 
-    @И("^убрать галочку в чек-боксе \"Включить символы\"$")
+    @И("^убрать галочку в чек-боксе 'Включить символы'$")
     public void removeTheCheckboxWithSymbols() {
         mainPage.removeTheCheckboxWithSymbols();
     }
 
-    @И("^выбрать в поле \"Длина пароля\" другое значение$")
+    @И("^выбрать в поле 'Длина пароля' значение 8$")
     public void chooseOtherPasswordLength() {
-        mainPage.chooseOtherPasswordLength();
+        mainPage.chooseOtherPasswordLength("8");
     }
 
-    @И("^проверить, что количество символов в пароле равно выбранному значению$")
+    @И("^проверить, что количество символов в пароле равно 8$")
     public void numberOfSymbolsInTheThirdPasswordCheck() {
-        mainPage.numberOfSymbolsInTheThirdPasswordCheck();
+        assertEquals("8", mainPage.returnThirdPassword());
     }
 
     @И("^закрытие окна браузера и прекращение работы драйвера$")
