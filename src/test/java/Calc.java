@@ -5,32 +5,30 @@
 import java.util.Scanner;
 
 public class Calc {
-    public static int calculateTheSumOfNumbers(int a, int b) {
+    static Scanner in = new Scanner(System.in);
+    static int operation = in.next().charAt(0);
+    static int result;
+
+    public int calculateTheSumOfNumbers(int a, int b) {
         return a + b;
     }
 
-    public static int calculateTheDifferenceOfNumbers(int a, int b) {
+    public int calculateTheDifferenceOfNumbers(int a, int b) {
         return a - b;
     }
 
-    public static int calculateTheMultiplicationOfNumbers(int a, int b) {
+    public int calculateTheMultiplicationOfNumbers(int a, int b) {
         return a * b;
     }
 
-    public static int calculateTheDivisionOfNumbers(int a, int b) {
+    public int calculateTheDivisionOfNumbers(int a, int b) {
+        if (b == 0) {
+            System.out.println("Input the number > 0, please!");
+        }
         return a / b;
     }
 
-    public static void main(String[] args) {
-        int result;
-        Scanner in = new Scanner(System.in);
-        System.out.print("Input the first number: ");
-        int a = in.nextInt();
-        System.out.print("Input the second number: ");
-        int b = in.nextInt();
-        System.out.print("Input the operation (variants: +, -, *, /): ");
-        int operation = in.next().charAt(0);
-
+    public int returnResultOfOperation(int a, int b) {
         switch (operation) {
             case '+':
                 result = calculateTheSumOfNumbers(a, b);
@@ -46,8 +44,22 @@ public class Calc {
                 break;
             default:
                 System.out.println("Choose the correct operation, please!");
-                return;
         }
+        return result;
+    }
+
+    public static void main(String[] args) {
+
+        Calc calc = new Calc();
+
+        System.out.print("Input the first number: ");
+        int a = in.nextInt();
+        System.out.print("Input the second number: ");
+        int b = in.nextInt();
+        System.out.print("Input the operation (variants: +, -, *, /): ");
+
+        calc.returnResultOfOperation(a, b);
+
         System.out.println(result);
 
 
