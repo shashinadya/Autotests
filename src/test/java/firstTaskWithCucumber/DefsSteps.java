@@ -8,55 +8,58 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class DefsSteps {
 
-    MainPage mainPage = new MainPage();
+    MainPage mainPage;
+    WebDriver driver;
+    String generatedFirstPassword;
+    String generatedSecondPassword;
+    String generatedThirdPassword;
 
-    @И("^настройка драйвера для браузера Chrome и инициализация драйвера$")
+    @И("настройка драйвера для браузера Chrome и инициализация драйвера")
     public void propertiesOfDriver() {
         System.setProperty("webdriver.chrome.driver", "D:\\projects\\Autotests\\libs\\chromedriver.exe");
-        WebDriver driver = new ChromeDriver();
+        driver = new ChromeDriver();
+        mainPage = new MainPage(driver);
     }
 
-    @И("^открыть сайт генератора паролей$")
+    @И("открыть сайт генератора паролей")
     public void openPasswordsGeneratorSite() {
-        mainPage.openPasswordsGeneratorSite();
+        driver.get("https://passwordsgenerator.net/ru/");
     }
 
-    @И("^нажать на кнопку 'Генерировать пароль' для генерации пароля$")
+    @И("нажать на кнопку 'Генерировать пароль' для генерации пароля")
     public void pushTheButtonForGeneratePassword() {
         mainPage.pushTheButtonForGeneratePassword();
     }
 
-    @И("^получить значение сгенерированного пароля$")
-    public void getPassword() {
-        mainPage.getPassword();
+    @И("проверить пароль на неравенство string")
+    public void firstPasswordIsNotNullCheck(String anotherPassword) {
+        generatedFirstPassword = mainPage.getPassword();
+        assertNotEquals(anotherPassword, generatedFirstPassword);
     }
 
-    @И("^проверить пароль на неравенство \"\"$")
-    public void firstPasswordIsNotNullCheck() {
-        assertNotEquals("", mainPage.returnFirstPassword());
-    }
-
-    @И("^проверить, что пароль не равен предыдущему паролю$")
+    @И("проверить, что пароль не равен предыдущему паролю")
     public void secondPasswordIsNotEqualToTheFirstPassword() {
-        assertNotEquals(mainPage.returnFirstPassword(), mainPage.returnSecondPassword());
+        generatedSecondPassword = mainPage.getPassword();
+        assertNotEquals(generatedFirstPassword, generatedSecondPassword);
     }
 
-    @И("^убрать галочку в чек-боксе 'Включить символы'$")
+    @И("убрать галочку в чек-боксе 'Включить символы'")
     public void removeTheCheckboxWithSymbols() {
         mainPage.removeTheCheckboxWithSymbols();
     }
 
-    @И("^выбрать в поле 'Длина пароля' значение 8$")
-    public void chooseOtherPasswordLength() {
-        mainPage.chooseOtherPasswordLength("8");
+    @И("выбрать в поле 'Длина пароля' значение string")
+    public void chooseOtherPasswordLength(String length) {
+        mainPage.chooseOtherPasswordLength(length);
     }
 
-    @И("^проверить, что количество символов в пароле равно 8$")
-    public void numberOfSymbolsInTheThirdPasswordCheck() {
-        assertEquals("8", mainPage.returnThirdPassword());
+    @И("проверить, что длина сгенерированного пароля равна string")
+    public void numberOfSymbolsInTheThirdPasswordCheck(String length) {
+        generatedThirdPassword = mainPage.getPassword();
+        assertEquals(length, generatedThirdPassword);
     }
 
-    @И("^закрытие окна браузера и прекращение работы драйвера$")
+    @И("закрытие окна браузера и прекращение работы драйвера")
     public void closeBrowserWindowAndFinishWorkWithDriver() {
         mainPage.closeBrowserWindowAndFinishWorkWithDriver();
     }
