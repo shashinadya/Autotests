@@ -5,8 +5,7 @@
 import java.util.Scanner;
 
 public class Calc {
-    static Scanner in = new Scanner(System.in);
-    static int operation = in.next().charAt(0);
+
     static int result;
 
     public int calculateTheSumOfNumbers(int a, int b) {
@@ -28,7 +27,7 @@ public class Calc {
         return a / b;
     }
 
-    public int returnResultOfOperation(int a, int b) {
+    public int returnResultOfOperation(int a, int b, int operation) {
         switch (operation) {
             case '+':
                 result = calculateTheSumOfNumbers(a, b);
@@ -51,14 +50,15 @@ public class Calc {
     public static void main(String[] args) {
 
         Calc calc = new Calc();
-
+        Scanner in = new Scanner(System.in);
+        int operation = in.next().charAt(0);
         System.out.print("Input the first number: ");
         int a = in.nextInt();
         System.out.print("Input the second number: ");
         int b = in.nextInt();
         System.out.print("Input the operation (variants: +, -, *, /): ");
 
-        calc.returnResultOfOperation(a, b);
+        calc.returnResultOfOperation(a, b, operation);
 
         System.out.println(result);
 
