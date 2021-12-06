@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Calc {
 
-    private static double result;
+    //private static double result;
 
     public int calculateTheSumOfNumbers(int a, int b) {
         return a + b;
@@ -47,6 +47,7 @@ public class Calc {
     }
 
     public int returnResultOfOperation(int a, int b, char operation) {
+        int result = 0;
         switch (operation) {
             case '+':
                 result = calculateTheSumOfNumbers(a, b);
@@ -63,10 +64,11 @@ public class Calc {
             default:
                 System.out.println("Choose the correct operation, please!");
         }
-        return (int) result;
+        return result;
     }
 
     public double returnResultOfOperation(double a, double b, char operation) {
+        double result = 0;
         switch (operation) {
             case '+':
                 result = calculateTheSumOfNumbers(a, b);
@@ -91,16 +93,16 @@ public class Calc {
         Calc calc = new Calc();
         Scanner in = new Scanner(System.in);
         System.out.print("Input the first number: ");
-        int a = in.nextInt();
+        double a = in.nextDouble();
         System.out.print("Input the second number: ");
-        int b = in.nextInt();
+        double b = in.nextDouble();
         System.out.print("Input the operation (variants: +, -, *, /): ");
         char operation = in.next().charAt(0);
 
-        calc.returnResultOfOperation(a, b, operation);
-
-        System.out.println(result);
-
-
+        if (a % 1 == 0 && b % 1 == 0) {
+            System.out.println(calc.returnResultOfOperation((int) a, (int) b, operation));
+        } else {
+            System.out.println(calc.returnResultOfOperation(a, b, operation));
+        }
     }
 }
