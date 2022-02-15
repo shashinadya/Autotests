@@ -17,7 +17,7 @@ public class MainPage {
     private final WebDriverWait wait;
 
     private static final String COMPUTERS_XPATH = "//a[text()='Компьютеры']";
-    private static final String MOTHERBOARDS_XPATH = "//a[text()='Материнские платы']\"";
+    private static final String MOTHERBOARDS_XPATH = "//a[text()='Материнские платы']";
     private static final String CARD_OF_MOTHERBOARD_XPATH = "//div[@class='catalog-product ui-button-widget']";
     private static final String SHOW_MORE_BUTTON_CSSSELECTOR = ".pagination-widget__show-more-btn";
     private static final String BUTTON_BUY_XPATH = "//button[text()='Купить']";

@@ -25,9 +25,10 @@ public class DefsSteps {
     public void propertiesOfDriver() {
         System.setProperty("webdriver.gecko.driver", "libs\\geckodriver.exe");
         driver = new FirefoxDriver();
-        mainPage = new dnsShopWithCucumberAndSelenide.MainPage(driver, actions, wait);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(100));
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(50));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(50));
+        actions = new Actions(driver);
+        mainPage = new dnsShopWithCucumberAndSelenide.MainPage(driver, actions, wait);
     }
 
     @И("открыть сайт магазина DNS")
@@ -67,7 +68,7 @@ public class DefsSteps {
     }
 
     @И("нажать на кнопку 'Купить' количество раз равное случайному сгенерированному числу")
-    public void clickToTheButtonBuy(int randomNumber) {
+    public void clickToTheButtonBuy() {
         mainPage.clickToTheButtonBuy(randomNumber);
     }
 
@@ -77,7 +78,7 @@ public class DefsSteps {
     }
 
     @И("сравнить число записей со случайным сгенерированным числом")
-    public void countOfCardsIsEqualRandomNumber(int randomNumber) {
+    public void countOfCardsIsEqualRandomNumber() {
         countOfCardsInTheBasket = mainPage.calculateCountOfCardsInTheBasket();
         assertEquals(countOfCardsInTheBasket, randomNumber);
     }
